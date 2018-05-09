@@ -30,5 +30,27 @@ def geojsonCConvert(cin,cout):
     except Exception as exp:
         print(exp)
 
-
+#处理csv列数据
+def coordConvertCsvCol():
+    import pandas as pd
+    #目前不支持含中文目录
+    g_path="D:/DigitalC_data/xiaoxueWgs84.csv" #原先坐标csv数据
+    s_path="D:/DigitalC_data/xiaoxuebd09_1.csv" #之后保存的位置
+    gridLst=pd.read_csv(g_path,encoding='utf-8')
+    gridLst['bdlng']=0 #增加两列
+    gridLst['bdlat']=0
+    
+    idx=[2,3,4,5]#[原先lng,原先lat,转换后lng,转换后lat]
+    for i in range(len(gridLst)):
+        lst=gridLst.iloc[i,]
+        bdc=wgs84_to_bd09(gridLst.iloc[i,idx[0]],gridLst.iloc[i,idx[1]])
+        gridLst.iloc[i,idx[2]]=bdc[0]
+        gridLst.iloc[i,idx[3]]=bdc[1]
+    gridLst.to_csv(s_path,index=False)
+    print('save at',s_path)
+        
+        
+        
+        
+        
 
