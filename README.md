@@ -3,7 +3,17 @@
 
 需要js版本可以移步[coordtransform](https://github.com/wandergis/coordtransform)
 
-# 使用说明
+
+## 项目下的其他文件
+
+- [batchCoordConvert.py](./batchCoordConvert.py) 封装一些批量转换的函数，调用coordtransform_py下的文件
+
+
+
+
+
+
+## 使用说明
 ```
     lng = 128.543
     lat = 37.065
