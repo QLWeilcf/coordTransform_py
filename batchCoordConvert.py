@@ -48,7 +48,39 @@ def coordConvertCsvCol():
         gridLst.iloc[i,idx[3]]=bdc[1]
     gridLst.to_csv(s_path,index=False)
     print('save at',s_path)
-        
+    
+#不用pandas
+def coordConvertCsv(cway=bd09_to_gcj02): #参数：cway：转换方式
+    
+    g_path = "abcsde.csv"  # 原先坐标csv数据
+    s_path = "abcede_out.csv"  # 之后保存的位置
+    idx = [1, 2, 4, 5] # [原先lng,原先lat,转换后lng,转换后lat]
+    gfile =open(g_path,'r')
+    with open(s_path,'w') as wf:
+        clst=csv.reader(gfile)
+        atHeader=True
+        for line in clst:
+            if atHeader:
+                atHeader=False
+                nline = line[:]
+                nline.insert(idx[1] + 1, 'gcjlat')
+                nline.insert(idx[1] + 1, 'gcjlng')
+                wf.write((','.join(nline))+'\n')
+                continue
+
+            coord=[float(line[idx[0]]),float(line[idx[1]])]
+            outCd=cway(coord[0],coord[1])
+            nline=line[:]
+            nline.insert(idx[1]+1, str(outCd[1])) #插入lat坐标
+            nline.insert(idx[1]+1,str(outCd[0]))
+            wf.write((','.join(nline))+'\n')
+            #except Exception as exp:
+                #print(line)
+                #print(exp)
+
+    print('save at', s_path)
+
+
         
         
         
