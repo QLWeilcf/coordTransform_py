@@ -28,6 +28,9 @@ to:3~6;和from中编号相同
 
 output有：JSON,XML
 
+
+未来交通实验室的[转换软件](http://www.hijtr.com/software-coordinate-transform/)支持WGS84、百度、火星的互转换。
+
 ### 验证
 
 
